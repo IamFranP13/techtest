@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Price implements Serializable {
+
     @Serial
     private static final long serialVersionUID = 7074157876869338882L;
 

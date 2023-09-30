@@ -5,7 +5,6 @@ import com.franpesal.techtest.application.service.impl.PriceServiceImpl;
 import com.franpesal.techtest.domain.Price;
 import com.franpesal.techtest.domain.PriceId;
 import com.franpesal.techtest.exceptions.PriceNotFoundException;
-import com.franpesal.techtest.infrastructure.mapper.PriceMapper;
 import com.franpesal.techtest.infrastructure.repository.PriceRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,8 +27,6 @@ public class PriceServiceImplTest {
     @Mock
     private PriceRepository priceRepository;
 
-    @Mock
-    private PriceMapper priceMapper;
 
     @BeforeEach
     public void setup() {
@@ -54,23 +51,27 @@ public class PriceServiceImplTest {
         mockPrice.setPriceList(1);
         mockPrice.setPrice(new BigDecimal("35.50"));
         mockPrice.setCurrency("EUR");
-        ApplicablePriceResponseDto mockDto = new ApplicablePriceResponseDto();
 
+        ApplicablePriceResponseDto expectedDto = new ApplicablePriceResponseDto(
+                1, 1,
+                LocalDateTime.of(2023, 9, 30, 0, 0),
+                LocalDateTime.of(2023, 10, 1, 0, 0),
+                1,
+                new BigDecimal("35.50"),
+                "EUR"
+        );
 
         when(priceRepository.findApplicablePrice(productId, brandId, date)).thenReturn(Optional.of(mockPrice));
-        when(priceMapper.priceToApplicablePriceResponseDto(mockPrice)).thenReturn(mockDto);
-
 
         ApplicablePriceResponseDto result = priceService.findApplicablePrice(productId, brandId, date);
 
-
-        assertEquals(mockDto, result);
-
+        assertEquals(expectedDto, result);
     }
+
 
     @Test
     public void testFindApplicablePrice_PriceNotFound() {
-        // Datos de prueba
+
         Integer productId = 1;
         Integer brandId = 1;
         LocalDateTime date = LocalDateTime.now();
