@@ -1,4 +1,4 @@
-package com.franpesal.techtest.repository;
+package com.franpesal.techtest.infraestructure.repository;
 
 
 import com.franpesal.techtest.domain.Price;
