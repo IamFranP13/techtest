@@ -2,7 +2,7 @@ package com.franpesal.techtest.repository;
 
 
 import com.franpesal.techtest.domain.Price;
-import com.franpesal.techtest.infrastructure.PriceRepository;
+import com.franpesal.techtest.infrastructure.repository.PriceRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
