@@ -1,26 +1,24 @@
-package com.franpesal.techtest.domain;
+package com.franpesal.techtest.infrastructure.database.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.io.Serial;
-import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "PRICES")
 @Data
-@Embeddable
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-public class PriceId implements Serializable {
+public class PriceEntity {
 
-
-    @Serial
-    private static final long serialVersionUID = 6097926565946385853L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "BRAND_ID", nullable = false)
     private Integer brandId;
@@ -36,4 +34,13 @@ public class PriceId implements Serializable {
 
     @Column(name = "PRIORITY", nullable = false)
     private Integer priority;
+
+    @Column(name = "PRICE_LIST", nullable = false)
+    private Integer priceList;
+
+    @Column(name = "PRICE", nullable = false, precision = 10, scale = 2)
+    private BigDecimal price;
+
+    @Column(name = "CURR", nullable = false)
+    private String currency;
 }
