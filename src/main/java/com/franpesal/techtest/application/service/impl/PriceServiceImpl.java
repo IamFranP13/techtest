@@ -2,7 +2,7 @@ package com.franpesal.techtest.application.service.impl;
 
 import com.franpesal.techtest.application.service.PriceUseCase;
 import com.franpesal.techtest.domain.model.ApplicablePrice;
-import com.franpesal.techtest.exceptions.PriceNotFoundException;
+import com.franpesal.techtest.configuration.PriceNotFoundException;
 import com.franpesal.techtest.infrastructure.database.repository.impl.PriceRepositoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,12 @@ public class PriceServiceImpl implements PriceUseCase {
         ApplicablePrice applicablePrice = priceRepository.findApplicablePrice(productId, brandId, date);
         if (applicablePrice == null) {
             logger.warn("No applicable price found for product {} and brand {} on date {}", productId, brandId, date);
-            throw new PriceNotFoundException("No applicable price found for given parameters");
+            throw new PriceNotFoundException(
+                    "No applicable price found for given parameters",
+                    productId,
+                    brandId,
+                    date
+            );
         }
         return applicablePrice;
     }
