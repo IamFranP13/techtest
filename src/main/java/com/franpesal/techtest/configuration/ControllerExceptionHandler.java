@@ -13,8 +13,8 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(PriceNotFoundException.class)
     public ResponseEntity<ErrorResponse> handlePriceNotFoundException(PriceNotFoundException ex) {
-        ErrorResponse error = new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage(), "Price not found");
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage(), "Price not found");
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InvalidParameterException.class)
