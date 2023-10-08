@@ -1,6 +1,7 @@
 package com.franpesal.techtest.infrastructure.api.controller;
 
 import com.franpesal.techtest.application.service.PriceUseCase;
+import com.franpesal.techtest.configuration.PriceNotFoundException;
 import com.franpesal.techtest.domain.model.ApplicablePrice;
 import com.franpesal.techtest.infrastructure.api.PriceApi;
 import com.franpesal.techtest.infrastructure.api.dto.ApplicablePriceResponseDto;
@@ -27,23 +28,28 @@ public class PriceController implements PriceApi {
         this.applicablePriceMapper = applicablePriceMapper;
     }
 
+    // En PriceController
     @Override
     public ResponseEntity<ApplicablePriceResponseDto> getApplicablePrice(
             @RequestParam Integer productId,
             @RequestParam Integer brandId,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime date ){
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime date ) {
         try {
             ApplicablePrice applicablePrice = priceService.findApplicablePrice(productId, brandId, date);
             if (applicablePrice == null) {
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Applicable price not found for the given parameters");
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Applicable price not found for the given parameters");
             }
-
             ApplicablePriceResponseDto applicablePriceResponseDto = applicablePriceMapper.toDto(applicablePrice);
-
             return ResponseEntity.ok(applicablePriceResponseDto);
+        } catch (PriceNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getLocalizedMessage());
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getLocalizedMessage());
         }
     }
+
+
+
+
 }
 

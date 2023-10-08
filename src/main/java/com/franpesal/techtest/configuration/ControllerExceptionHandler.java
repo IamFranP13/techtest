@@ -1,5 +1,7 @@
 package com.franpesal.techtest.configuration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -10,6 +12,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 @RestControllerAdvice
 public class ControllerExceptionHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 
     @ExceptionHandler(PriceNotFoundException.class)
     public ResponseEntity<ErrorResponse> handlePriceNotFoundException(PriceNotFoundException ex) {
@@ -40,4 +44,8 @@ public class ControllerExceptionHandler {
         ErrorResponse error = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), "Method argument type mismatch", ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+
 }
+
+
+
