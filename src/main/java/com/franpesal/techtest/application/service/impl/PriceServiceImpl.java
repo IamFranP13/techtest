@@ -23,6 +23,7 @@ public class PriceServiceImpl implements PriceUseCase {
     @Override
     public ApplicablePrice findApplicablePrice(Integer productId, Integer brandId, LocalDateTime date) {
         ApplicablePrice applicablePrice = priceRepository.findApplicablePrice(productId, brandId, date);
+
         if (applicablePrice == null) {
             logger.warn("No applicable price found for product {} and brand {} on date {}", productId, brandId, date);
             throw new PriceNotFoundException(

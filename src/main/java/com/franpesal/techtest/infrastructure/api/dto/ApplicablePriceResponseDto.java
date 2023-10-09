@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 @Schema(description = "Data Transfer Object representing the applicable price for a product")
 public class ApplicablePriceResponseDto {
 
+
     @Schema(description = "Product ID", example = "35455")
     private Integer productId;
 
@@ -32,6 +33,9 @@ public class ApplicablePriceResponseDto {
 
     @Schema(description = "Price List ID", example = "1")
     private Integer priceList;
+
+    @Schema(description = "Priority", example = "1")
+    private Integer priority;
 
     @Schema(description = "Actual price", example = "35.50")
     @NumberFormat(pattern = "#0.00")

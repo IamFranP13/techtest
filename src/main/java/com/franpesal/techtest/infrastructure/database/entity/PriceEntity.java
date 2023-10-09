@@ -32,11 +32,11 @@ public class PriceEntity {
     @Column(name = "END_DATE", nullable = false)
     private LocalDateTime endDate;
 
-    @Column(name = "PRIORITY", nullable = false)
-    private Integer priority;
-
     @Column(name = "PRICE_LIST", nullable = false)
     private Integer priceList;
+
+    @Column(name = "PRIORITY", nullable = false)
+    private Integer priority;
 
     @Column(name = "PRICE", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;

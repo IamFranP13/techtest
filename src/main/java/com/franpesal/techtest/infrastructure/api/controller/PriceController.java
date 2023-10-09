@@ -28,7 +28,7 @@ public class PriceController implements PriceApi {
         this.applicablePriceMapper = applicablePriceMapper;
     }
 
-    // En PriceController
+
     @Override
     public ResponseEntity<ApplicablePriceResponseDto> getApplicablePrice(
             @RequestParam Integer productId,
