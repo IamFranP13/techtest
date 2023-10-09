@@ -1,6 +1,4 @@
-# Tech Test GFT
-
-Backend tech test
+# Backend tech test
 
 ## Prerequisites
 
@@ -16,9 +14,7 @@ git glone https://github.com/IamFranP13/techtest.git
 
 ## Build and Packaging
 
-The project uses Maven for dependency management and packaging due to its familiarity and the community support available for troubleshooting when needed.
-
-To build the downloaded project, navigate to the directory where the project resides and run the following command:
+The project uses Maven for dependency management and packaging. Navigate to the directory where the project resides and run the following command:
 
 ```bash
 mvn clean package
@@ -26,22 +22,23 @@ mvn clean package
 
 This will generate the executable JAR file in the target directory.
 
-## Creating Docker Image
+## Creating Docker Image using Docker Compose
 
-To create the Docker image of the application, first make sure Docker is running on your system, and then execute the following command at the root of the project:
-
+First, make sure that Docker and Docker Compose are running on your system. Then, execute the following command at the root of the project:
 ```bash
-docker build -t techtest-gft .
+docker-compose up --build -d
 ```
 
-## Running application
+This will build your image and run it in a new Docker container as defined in your docker-compose.yml file.
 
-To run the application in a Docker container, execute the following command:
+## Running application using Docker Compose
+
+To run the application along with any other services defined in your docker-compose.yml, simply run:
 
 ```bash
-docker run -d --name techtest-gft -p 8080:8080 techtest-gft
+docker-compose up
 ```
-This will start a new Docker container named techtest-gft based on the techtest-gft image. Application will be accesible at http://localhost:8080
+Your application will be accessible at http://localhost:8080.
 
 ## Accessing Swagger UI 
 Once the application is running, you can access the Swagger UI and API Docs via:
